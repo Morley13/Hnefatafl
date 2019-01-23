@@ -16,7 +16,11 @@ public class Hnefatafl extends Application {
             
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("WE ARE HERE");
+                
+                Board b = new Board();
+                b.initialise();
+                System.out.println(b.toString());
+                
             }
         });
         
