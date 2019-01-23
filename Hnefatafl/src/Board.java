@@ -22,14 +22,38 @@ public class Board {
         return LENGTH;
     }
     
-    public String getPieceAtIndex(int column, int height) {
-        return board[column][height].toString();
+    public void initialise() {
+        //Defenders
+        for(int i = 3; i < 6; i++) {
+            this.board[0][i] = new Piece();
+            this.board[i][0] = new Piece();
+            this.board[i][WIDTH-1] = new Piece();
+            this.board[LENGTH-1][i] = new Piece();
+        }
+        this.board[4][1] = new Piece();
+        this.board[1][4] = new Piece();
+        this.board[7][4] = new Piece();
+        this.board[4][7] = new Piece();
+        
+        //Attackers        
+        for(int j = 2; j < 7; j++) {
+            if(j == 4) {
+                this.board[4][j] = new Piece();
+            }
+            this.board[4][j] = new Piece();
+            this.board[j][4] = new Piece();
+        }
+        
+    }
+    
+    public Piece getPieceAtIndex(int column, int height) {
+        return board[column][height];
     }
     
     public boolean positionAtIndexIsEmpty(int column, int height) {
         return board[column][height] == null;
     }
-    
+         
     @Override
     public String toString() { 
         final String BAR = "|";
@@ -48,7 +72,7 @@ public class Board {
                 if(positionAtIndexIsEmpty(j, k)) {
                     board += " " + BAR;
                 } else {
-                    board += getPieceAtIndex(j, k) + BAR;
+                    board += getPieceAtIndex(j, k).toString() + BAR;
                 }
             }
             board += "\n";
